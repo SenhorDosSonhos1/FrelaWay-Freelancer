@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'autenticacao/css/cadastro.css' %}">
+{% endblock %}
+
+{% block 'title' %}
+    Login
+{% endblock  %}
+
+{% block 'body' %}
+    <div class="box">
+        <form action="{% url 'login' %}" method="post">{% csrf_token %}
+            <h1 class="titulo font-degrade borda-bottom-degrade">LOGAR</h2>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}" role="alert">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <br>
+                <span class="span-descricao">Nome de usuário:</span>
+                <input type="text" class="form-control input-cadastro" name="username">
+                <br>
+                <span class="span-descricao">Senha:</span>
+                <input type="password" class="form-control input-cadastro" name="password">
+                
+                <a href="{% url 'password_reset' %}" style="margin-top: 10px; margin-bottom: 10px;">Esqueci minha senha</a>
+
+                <br><br>
+                <input type="submit" value="LOGAR" class="btn btn-success btn-lg">
+                
+                <a href="{% url 'cadastro' %}" class="btn btn-primary btn-lg">CADASTRO</a>
+        </form>
+    </div>
+{% endblock %}
